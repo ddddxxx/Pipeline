@@ -13,5 +13,7 @@ if let data = data,
     result = nil
 }
 
-let _result = (data, String.Encoding.utf8) ?> String.init(data:encoding:) ?> Double.init ?> Int.init(exactly:)
+_ = data.flatMap({String(data: $0, encoding: .utf8)}).flatMap({Double($0)}).flatMap({Int(exactly: $0)})
+
+_ = (data, String.Encoding.utf8) ?> String.init(data:encoding:) ?> Double.init ?> Int.init(exactly:)
 
