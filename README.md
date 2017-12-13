@@ -1,5 +1,6 @@
 # Chaining Function
 
+[![Build Status](https://travis-ci.org/ddddxxx/ChainingFunction.svg?branch=master)](https://travis-ci.org/ddddxxx/ChainingFunction)
 ![supports](https://img.shields.io/badge/supports-Carthage%20%7C%20Swift_PM-brightgreen.svg)
 ![swift](https://img.shields.io/badge/swift-4.0-orange.svg)
 
