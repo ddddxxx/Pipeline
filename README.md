@@ -20,19 +20,19 @@ It's super useful when you want to `(pass?.aLongOptionalChaining()?.to ?< aFunct
 
 ## Quick Look
 
-```
+```swift
 let result = (data, String.Encoding.utf8) ?> String.init(data:encoding:) ?> Double.init ?> Int.init(exactly:)
 ```
 
 is equivalent to:
 
-```
+```swift
 let result = data.flatMap({String(data: $0, encoding: .utf8)}).flatMap({Double($0)}).flatMap({Int(exactly: $0)})
 ```
 
 or more redundant:
 
-```
+```swift
 let result: Int?
 if let data = data,
     let str = String.init(data: data, encoding: .utf8),
