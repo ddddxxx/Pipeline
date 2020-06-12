@@ -50,7 +50,7 @@ Add the project to your `Package.swift` file:
 
 ```swift
 package.dependencies += [
-    .package(url: "https://github.com/ddddxxx/ChainingFunction", from: 1.0.0)
+    .package(url: "https://github.com/ddddxxx/ChainingFunction", from: "1.0.0"),
 ]
 ```
 
