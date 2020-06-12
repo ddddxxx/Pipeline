@@ -1,8 +1,6 @@
 # Chaining Function
 
-[![Build Status](https://travis-ci.org/ddddxxx/ChainingFunction.svg?branch=master)](https://travis-ci.org/ddddxxx/ChainingFunction)
-![supports](https://img.shields.io/badge/supports-Carthage%20%7C%20Swift_PM-brightgreen.svg)
-![swift](https://img.shields.io/badge/swift-4.0-orange.svg)
+![supports](https://img.shields.io/badge/Swift_Package_Manager-compatible-brightgreen.svg)
 
 Syntactic sugar for Swift optional chaining. Allows you to add a non-optional funcion invocation into a optional chaining.
 
@@ -46,24 +44,14 @@ if let data = data,
 
 ## Installation
 
-### [Carthage](https://github.com/Carthage/Carthage)
-
-Add the project to your `Cartfile`:
-
-```
-github "ddddxxx/ChainingFunction"
-```
-
 ### [Swift Package Manager](https://github.com/apple/swift-package-manager)
 
 Add the project to your `Package.swift` file:
 
 ```swift
-let package = Package(
-    dependencies: [
-        .Package(url: "https://github.com/ddddxxx/ChainingFunction")
-    ]
-)
+package.dependencies += [
+    .package(url: "https://github.com/ddddxxx/ChainingFunction", from: 1.0.0)
+]
 ```
 
 ## License
