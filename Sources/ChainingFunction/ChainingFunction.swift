@@ -15,35 +15,72 @@
 //  all copies or substantial portions of the Software.
 //
 
-precedencegroup OptionalArgumentChainingPrecedence {
+precedencegroup FunctionApplicationPrecedence {
     associativity:  left
     higherThan:     NilCoalescingPrecedence
     lowerThan:      CastingPrecedence
 }
 
-infix operator ?> : OptionalArgumentChainingPrecedence
+// MARK: |>
 
-public func ?><T, R>(arg: T?, func: (T) -> R?) -> R? {
+infix operator |> : FunctionApplicationPrecedence
+
+@inlinable @inline(__always)
+public func |><T, R>(arg: T, body: (T) throws -> R) rethrows -> R {
+    return try body(arg)
+}
+
+@inlinable @inline(__always)
+public func |><T, U, R>(arg: (T, U), body: (T, U) throws -> R) rethrows -> R {
+    return try body(arg.0, arg.1)
+}
+
+@inlinable @inline(__always)
+public func |><T, U, V, R>(arg: (T, U, V), body: (T, U, V) throws -> R) rethrows -> R {
+    return try body(arg.0, arg.1, arg.2)
+}
+
+@inlinable @inline(__always)
+public func |><T, U, V, W, R>(arg: (T, U, V, W), body: (T, U, V, W) throws -> R) rethrows -> R? {
+    return try body(arg.0, arg.1, arg.2, arg.3)
+}
+
+@inlinable @inline(__always)
+public func |><T, U, V, W, X, R>(arg: (T, U, V, W, X), body: (T, U, V, W, X) throws -> R) rethrows -> R {
+    return try body(arg.0, arg.1, arg.2, arg.3, arg.4)
+}
+
+// MARK: ?>
+
+infix operator ?> : FunctionApplicationPrecedence
+
+@inlinable @inline(__always)
+public func ?><T, R>(arg: T?, body: (T) throws -> R?) rethrows -> R? {
     guard let arg = arg else { return nil }
-    return `func`(arg)
+    return try body(arg)
 }
 
-public func ?><T, U, R>(arg: (T?, U?), func: (T, U) -> R?) -> R? {
+@inlinable @inline(__always)
+public func ?><T, U, R>(arg: (T?, U?), body: (T, U) throws -> R?) rethrows -> R? {
     guard let arg0 = arg.0, let arg1 = arg.1 else { return nil }
-    return `func`(arg0, arg1)
+    return try body(arg0, arg1)
 }
 
-public func ?><T, U, V, R>(arg: (T?, U?, V?), func: (T, U, V) -> R?) -> R? {
+@inlinable @inline(__always)
+public func ?><T, U, V, R>(arg: (T?, U?, V?), body: (T, U, V) throws -> R?) rethrows -> R? {
     guard let arg0 = arg.0, let arg1 = arg.1, let arg2 = arg.2 else { return nil }
-    return `func`(arg0, arg1, arg2)
+    return try body(arg0, arg1, arg2)
 }
 
-public func ?><T, U, V, W, R>(arg: (T?, U?, V?, W?), func: (T, U, V, W) -> R?) -> R? {
+@inlinable @inline(__always)
+public func ?><T, U, V, W, R>(arg: (T?, U?, V?, W?), body: (T, U, V, W) throws -> R?) rethrows -> R? {
     guard let arg0 = arg.0, let arg1 = arg.1, let arg2 = arg.2, let arg3 = arg.3 else { return nil }
-    return `func`(arg0, arg1, arg2, arg3)
+    return try body(arg0, arg1, arg2, arg3)
 }
 
-public func ?><T, U, V, W, X, R>(arg: (T?, U?, V?, W?, X?), func: (T, U, V, W, X) -> R?) -> R? {
+@inlinable @inline(__always)
+public func ?><T, U, V, W, X, R>(arg: (T?, U?, V?, W?, X?), body: (T, U, V, W, X) throws -> R?) rethrows -> R? {
     guard let arg0 = arg.0, let arg1 = arg.1, let arg2 = arg.2, let arg3 = arg.3, let arg4 = arg.4 else { return nil }
-    return `func`(arg0, arg1, arg2, arg3, arg4)
+    return try body(arg0, arg1, arg2, arg3, arg4)
 }
+
