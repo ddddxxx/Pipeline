@@ -1,6 +1,6 @@
 import XCTest
-@testable import ChainingFunctionTests
+@testable import PipelineTests
 
 XCTMain([
-    testCase(ChainingFunctionTests.allTests),
+    testCase(PipelineTests.allTests),
 ])

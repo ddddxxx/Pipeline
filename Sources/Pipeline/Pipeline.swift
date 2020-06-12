@@ -1,7 +1,7 @@
 //
-//  ChainingFunction.swift
+//  Pipeline.swift
 //
-//  This file is part of ChainingFunction. <https://github.com/ddddxxx/ChainingFunction>
+//  This file is part of Pipeline. <https://github.com/ddddxxx/Pipeline>
 //  Copyright (c) 2017 Xander Deng
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -15,15 +15,15 @@
 //  all copies or substantial portions of the Software.
 //
 
-precedencegroup FunctionApplicationPrecedence {
-    associativity:  left
-    higherThan:     NilCoalescingPrecedence
-    lowerThan:      CastingPrecedence
+precedencegroup PipelinePrecedence {
+    associativity: left
+    higherThan: NilCoalescingPrecedence
+    lowerThan: CastingPrecedence
 }
 
 // MARK: |>
 
-infix operator |> : FunctionApplicationPrecedence
+infix operator |> : PipelinePrecedence
 
 @inlinable @inline(__always)
 public func |><T, R>(arg: T, body: (T) throws -> R) rethrows -> R {
@@ -52,7 +52,7 @@ public func |><T, U, V, W, X, R>(arg: (T, U, V, W, X), body: (T, U, V, W, X) thr
 
 // MARK: ?>
 
-infix operator ?> : FunctionApplicationPrecedence
+infix operator ?> : PipelinePrecedence
 
 @inlinable @inline(__always)
 public func ?><T, R>(arg: T?, body: (T) throws -> R?) rethrows -> R? {
@@ -62,25 +62,25 @@ public func ?><T, R>(arg: T?, body: (T) throws -> R?) rethrows -> R? {
 
 @inlinable @inline(__always)
 public func ?><T, U, R>(arg: (T?, U?), body: (T, U) throws -> R?) rethrows -> R? {
-    guard let arg0 = arg.0, let arg1 = arg.1 else { return nil }
+    guard case let (arg0?, arg1?) = arg else { return nil }
     return try body(arg0, arg1)
 }
 
 @inlinable @inline(__always)
 public func ?><T, U, V, R>(arg: (T?, U?, V?), body: (T, U, V) throws -> R?) rethrows -> R? {
-    guard let arg0 = arg.0, let arg1 = arg.1, let arg2 = arg.2 else { return nil }
+    guard case let (arg0?, arg1?, arg2?) = arg else { return nil }
     return try body(arg0, arg1, arg2)
 }
 
 @inlinable @inline(__always)
 public func ?><T, U, V, W, R>(arg: (T?, U?, V?, W?), body: (T, U, V, W) throws -> R?) rethrows -> R? {
-    guard let arg0 = arg.0, let arg1 = arg.1, let arg2 = arg.2, let arg3 = arg.3 else { return nil }
+    guard case let (arg0?, arg1?, arg2?, arg3?) = arg else { return nil }
     return try body(arg0, arg1, arg2, arg3)
 }
 
 @inlinable @inline(__always)
 public func ?><T, U, V, W, X, R>(arg: (T?, U?, V?, W?, X?), body: (T, U, V, W, X) throws -> R?) rethrows -> R? {
-    guard let arg0 = arg.0, let arg1 = arg.1, let arg2 = arg.2, let arg3 = arg.3, let arg4 = arg.4 else { return nil }
+    guard case let (arg0?, arg1?, arg2?, arg3?, arg4?) = arg else { return nil }
     return try body(arg0, arg1, arg2, arg3, arg4)
 }
 

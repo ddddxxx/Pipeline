@@ -3,18 +3,18 @@
 import PackageDescription
 
 let package = Package(
-    name: "ChainingFunction",
+    name: "Pipeline",
     products: [
         .library(
-            name: "ChainingFunction",
-            targets: ["ChainingFunction"]),
+            name: "Pipeline",
+            targets: ["Pipeline"]),
     ],
     targets: [
         .target(
-            name: "ChainingFunction",
+            name: "Pipeline",
             dependencies: []),
         .testTarget(
-            name: "ChainingFunctionTests",
-            dependencies: ["ChainingFunction"]),
+            name: "PipelineTests",
+            dependencies: ["Pipeline"]),
     ]
 )

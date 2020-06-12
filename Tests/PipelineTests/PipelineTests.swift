@@ -1,7 +1,7 @@
 //
-//  ChainingFunctionTests.swift
+//  PipelineTests.swift
 //
-//  This file is part of ChainingFunction. <https://github.com/ddddxxx/ChainingFunction>
+//  This file is part of Pipeline. <https://github.com/ddddxxx/Pipeline>
 //  Copyright (c) 2017 Xander Deng
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -16,13 +16,13 @@
 //
 
 import XCTest
-@testable import ChainingFunction
+@testable import Pipeline
 
-class ChainingFunctionTests: XCTestCase {
+class PipelineTests: XCTestCase {
 
     func testOptionalArgumentChaining() {
         func f(_ data: Data?) -> Int? {
-            return (data, String.Encoding.utf8) ?> String.init(data:encoding:) ?> Double.init ?> Int.init(exactly:)
+            return (data, .utf8) ?> String.init(data:encoding:) ?> Double.init ?> Int.init(exactly:)
         }
         
         XCTAssertNil(f(nil))
