@@ -30,26 +30,6 @@ public func |><T, R>(arg: T, body: (T) throws -> R) rethrows -> R {
     return try body(arg)
 }
 
-@inlinable @inline(__always)
-public func |><T, U, R>(arg: (T, U), body: (T, U) throws -> R) rethrows -> R {
-    return try body(arg.0, arg.1)
-}
-
-@inlinable @inline(__always)
-public func |><T, U, V, R>(arg: (T, U, V), body: (T, U, V) throws -> R) rethrows -> R {
-    return try body(arg.0, arg.1, arg.2)
-}
-
-@inlinable @inline(__always)
-public func |><T, U, V, W, R>(arg: (T, U, V, W), body: (T, U, V, W) throws -> R) rethrows -> R? {
-    return try body(arg.0, arg.1, arg.2, arg.3)
-}
-
-@inlinable @inline(__always)
-public func |><T, U, V, W, X, R>(arg: (T, U, V, W, X), body: (T, U, V, W, X) throws -> R) rethrows -> R {
-    return try body(arg.0, arg.1, arg.2, arg.3, arg.4)
-}
-
 // MARK: ?>
 
 infix operator ?> : PipelinePrecedence
@@ -83,4 +63,3 @@ public func ?><T, U, V, W, X, R>(arg: (T?, U?, V?, W?, X?), body: (T, U, V, W, X
     guard case let (arg0?, arg1?, arg2?, arg3?, arg4?) = arg else { return nil }
     return try body(arg0, arg1, arg2, arg3, arg4)
 }
-
